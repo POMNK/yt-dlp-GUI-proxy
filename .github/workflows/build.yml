@@ -21,11 +21,16 @@ jobs:
 
     - name: Prepare Release Folder Structure
       run: |
-        mkdir release-pack
-        move .\final-exe\yt-dlp-gui.exe .\release-pack\yt-dlp-gui.exe
-        mkdir .\release-pack\utils
-        echo Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe here. > .\release-pack\utils\readme.txt
-      shell: cmd
+        # Создаем папки
+        New-Item -ItemType Directory -Force -Path .\release-pack
+        New-Item -ItemType Directory -Force -Path .\release-pack\utils
+        
+        # Переносим собранный .exe с оригинальным именем маленькими буквами
+        Move-Item -Path .\final-exe\yt-dlp-gui.exe -Destination .\release-pack\yt-dlp-gui.exe
+        
+        # Записываем текст в файл readme.txt
+        "Поместите файлы yt-dlp.exe, ffmpeg.exe и ffprobe.exe в эту папку." | Out-File -FilePath .\release-pack\utils\readme.txt -Encoding utf8
+      shell: powershell
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
