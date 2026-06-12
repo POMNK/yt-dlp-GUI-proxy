@@ -1,1 +1,1 @@
-fork yt-dlp GUI + proxy + download-sections
+fork yt-dlp GUI + proxy
