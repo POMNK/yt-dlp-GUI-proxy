@@ -13,8 +13,7 @@ namespace yt_dlp_GUI
             toolTipProjectWebsite.SetToolTip(linkLabelProjectWebsite, "https://pprmint.de/yt-dlp-gui");
             toolTipWebsite.SetToolTip(pictureBoxFooter, "https://pprmint.de");
             // yt-dlp.
-            toolTipYtdlpGithub.SetToolTip(linkLabelYtdlpGithub, "https://github.com/yt-dlp/yt-dlp");
-            toolTipYtdlpDiscord.SetToolTip(linkLabelYtdlpDiscord, "https://discord.gg/H5MNcFW63r");
+            toolTipYtdlpGithub.SetToolTip(linkLabelYtdlpGithub, "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe");
             // FFmpeg.
             toolTipFfmpegGithub.SetToolTip(linkLabelFfmpegGithub, "https://github.com/yt-dlp/FFmpeg-Builds");
             toolTipFfmpegWebsite.SetToolTip(linkLabelFfmpegWebsite, "https://ffmpeg.org");
