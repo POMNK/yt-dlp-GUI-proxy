@@ -376,52 +376,6 @@ namespace yt_dlp_GUI
             string videoFormat = dropdownVideoFormat.Text;
             string videoResolution = dropdownVideoResolution.Text.TrimEnd('p');
             string audioFormat = dropdownAudioFormat.Text;
-            
-            string sectionArg = "";
-
-            // Функция перевода ЧЧ:ММ:СС или ММ:СС в чистые секунды
-            string ToSeconds(string input)
-            {
-                if (string.IsNullOrWhiteSpace(input)) return "";
-                input = input.Trim();
-                
-                // Если это просто число (секунды), отдаем как есть
-                if (!input.Contains(":")) return input;
-                
-                try
-                {
-                    string[] parts = input.Split(':');
-                    int hours = 0, minutes = 0, seconds = 0;
-                    
-                    if (parts.Length == 3) // ЧЧ:ММ:СС
-                    {
-                        int.TryParse(parts[0], out hours);
-                        int.TryParse(parts[1], out minutes);
-                        int.TryParse(parts[2], out seconds);
-                    }
-                    else if (parts.Length == 2) // ММ:СС
-                    {
-                        int.TryParse(parts[0], out minutes);
-                        int.TryParse(parts[1], out seconds);
-                    }
-                    
-                    return ((hours * 3600) + (minutes * 60) + seconds).ToString();
-                }
-                catch { return "0"; }
-            }
-
-            // Если заполнено From или To, конвертируем время в секунды
-            if (!string.IsNullOrWhiteSpace(txtStartSection.Text) || !string.IsNullOrWhiteSpace(txtEndSection.Text))
-            {
-                string startSec = ToSeconds(txtStartSection.Text);
-                string endSec = ToSeconds(txtEndSection.Text);
-                
-                string startValue = string.IsNullOrWhiteSpace(startSec) ? "0" : startSec;
-                string endValue = string.IsNullOrWhiteSpace(endSec) ? "inf" : endSec;
-                
-                // Передаем аргумент без кавычек и двоеточий — теперь ничего не зависнет!
-                sectionArg = $" --download-sections *{startValue}-{endValue}";
-            }
 
             // Формируем аргумент прокси, если поле txtProxy заполнено
             string proxyArg = !string.IsNullOrWhiteSpace(txtProxy.Text) 
@@ -435,8 +389,8 @@ namespace yt_dlp_GUI
             {
                 FileName = ytdlpExe,
                 Arguments = radioButtonVideo.Checked
-                    ? string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -f \"bv*[ext=", videoFormat, "][height<=", videoResolution, "]+ba[ext=m4a]/b\" --ffmpeg-location \"", ffmpegExe, "\" --remux-video ", videoFormat, " --windows-filenames", proxyArg, sectionArg)
-                    : string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -x --audio-format ", audioFormat, " --ffmpeg-location \"", ffmpegExe, "\" --windows-filenames", proxyArg, sectionArg),
+                    ? string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -f \"bv*[ext=", videoFormat, "][height<=", videoResolution, "]+ba[ext=m4a]/b\" --ffmpeg-location \"", ffmpegExe, "\" --remux-video ", videoFormat, " --windows-filenames", proxyArg)
+                    : string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -x --audio-format ", audioFormat, " --ffmpeg-location \"", ffmpegExe, "\" --windows-filenames", proxyArg),
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
