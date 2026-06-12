@@ -172,7 +172,6 @@
             linkLabelYtdlpDiscord.TabStop = true;
             linkLabelYtdlpDiscord.Text = "Discord server";
             linkLabelYtdlpDiscord.VisitedLinkColor = SystemColors.Highlight;
-            linkLabelYtdlpDiscord.LinkClicked += LinkLabelYtdlpDiscord_LinkClicked;
             linkLabelYtdlpDiscord.Visible = false;
             // 
             // linkLabelFfmpegWebsite
@@ -188,7 +187,6 @@
             linkLabelFfmpegWebsite.TabStop = true;
             linkLabelFfmpegWebsite.Text = "Project website";
             linkLabelFfmpegWebsite.VisitedLinkColor = SystemColors.Highlight;
-            linkLabelFfmpegWebsite.LinkClicked += LinkLabelFfmpegWebsite_LinkClicked;
             linkLabelYtdlpDiscord.Visible = false;
             // 
             // linkLabelFfmpegGithub
