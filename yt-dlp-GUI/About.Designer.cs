@@ -246,11 +246,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(430, 353);
             Controls.Add(linkLabelProjectWebsite);
-            Controls.Add(linkLabelFfmpegWebsite);
             Controls.Add(linkLabelFfmpegGithub);
             Controls.Add(labelFfmpegDescription);
             Controls.Add(labelFfmpeg);
-            Controls.Add(linkLabelYtdlpDiscord);
             Controls.Add(linkLabelYtdlpGithub);
             Controls.Add(labelYtdlpDescription);
             Controls.Add(labelYtdlp);
