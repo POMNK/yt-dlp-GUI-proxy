@@ -170,7 +170,7 @@ namespace yt_dlp_GUI
         // yt-dlp --version
         private void GetVersion()
         {
-            StartInfo versionStartInfo = new()
+            ProcessStartInfo versionStartInfo = new()
             {
                 FileName = ytdlpExe,
                 Arguments = "--version",
