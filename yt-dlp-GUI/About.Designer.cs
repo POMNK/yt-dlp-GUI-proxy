@@ -155,7 +155,7 @@
             linkLabelYtdlpGithub.Size = new Size(45, 16);
             linkLabelYtdlpGithub.TabIndex = 9;
             linkLabelYtdlpGithub.TabStop = true;
-            linkLabelYtdlpGithub.Text = "Source";
+            linkLabelYtdlpGithub.Text = "Latest Version";
             linkLabelYtdlpGithub.VisitedLinkColor = SystemColors.Highlight;
             linkLabelYtdlpGithub.LinkClicked += LinkLabelYtdlpGithub_LinkClicked;
             // 
@@ -173,6 +173,7 @@
             linkLabelYtdlpDiscord.Text = "Discord server";
             linkLabelYtdlpDiscord.VisitedLinkColor = SystemColors.Highlight;
             linkLabelYtdlpDiscord.LinkClicked += LinkLabelYtdlpDiscord_LinkClicked;
+            linkLabelYtdlpDiscord.Visible = false;
             // 
             // linkLabelFfmpegWebsite
             // 
@@ -188,6 +189,7 @@
             linkLabelFfmpegWebsite.Text = "Project website";
             linkLabelFfmpegWebsite.VisitedLinkColor = SystemColors.Highlight;
             linkLabelFfmpegWebsite.LinkClicked += LinkLabelFfmpegWebsite_LinkClicked;
+            linkLabelYtdlpDiscord.Visible = false;
             // 
             // linkLabelFfmpegGithub
             // 
@@ -200,7 +202,7 @@
             linkLabelFfmpegGithub.Size = new Size(45, 16);
             linkLabelFfmpegGithub.TabIndex = 13;
             linkLabelFfmpegGithub.TabStop = true;
-            linkLabelFfmpegGithub.Text = "Source";
+            linkLabelFfmpegGithub.Text = "Latest Version";
             linkLabelFfmpegGithub.VisitedLinkColor = SystemColors.Highlight;
             linkLabelFfmpegGithub.LinkClicked += LinkLabelFfmpegGithub_LinkClicked;
             // 
