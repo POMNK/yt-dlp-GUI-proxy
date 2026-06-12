@@ -21,16 +21,9 @@ jobs:
 
     - name: Prepare Release Folder Structure
       run: |
-        # Создаем чистую папку для финальной упаковки
         mkdir release-pack
-        
-        # Переносим туда наш собранный монолитный .exe
         move .\final-exe\yt-dlp-gui.exe .\release-pack\yt-dlp-gui.exe
-        
-        # Создаем папку utils
         mkdir .\release-pack\utils
-        
-        # Создаем текстовый файл внутри utils, чтобы папка не была пустой и попала в ZIP
         echo Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe here. > .\release-pack\utils\readme.txt
       shell: cmd
 
