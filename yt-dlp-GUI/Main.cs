@@ -382,11 +382,11 @@ namespace yt_dlp_GUI
             // Если домохозяйка заполнила From или To, собираем команду нарезки
             if (!string.IsNullOrWhiteSpace(txtStartSection.Text) || !string.IsNullOrWhiteSpace(txtEndSection.Text))
             {
-                // Задаем значения по умолчанию: старт с 0, конец — до самого финала (inf)
                 string startValue = string.IsNullOrWhiteSpace(txtStartSection.Text) ? "0" : txtStartSection.Text.Trim();
                 string endValue = string.IsNullOrWhiteSpace(txtEndSection.Text) ? "inf" : txtEndSection.Text.Trim();
                 
-                sectionArg = $" --download-sections \"*{startValue}-{endValue}\"";
+                // Добавили флаг --force-keyframes-at-cuts для точной и гарантированной обрезки
+                sectionArg = $" --download-sections \"*{startValue}-{endValue}\" --force-keyframes-at-cuts";
             }
 
             // Формируем аргумент прокси, если поле txtProxy заполнено
