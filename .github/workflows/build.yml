@@ -16,16 +16,24 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Publish Self-Contained Single File
-      run: dotnet publish --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-exe
+    # Собираем стандартный легковесный вариант БЕЗ Self-Contained движка внутри
+    # Флаг PublishSingleFile=true спрессует только код программы, снизив вес до минимума
+    - name: Publish Lightweight Single File
+      run: dotnet publish ./yt-dlp-GUI/yt-dlp-GUI.csproj --configuration Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-build
 
-    - name: Move EXE to Root
+    - name: Create Utils Folder and Clean Junk
       run: |
-        move .\final-exe\yt-dlp-gui.exe .\yt-dlp-gui.exe
-      shell: cmd
+        # Создаем папку utils и readme файл
+        New-Item -ItemType Directory -Force -Path .\final-build\utils
+        "Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe here." | Out-File -FilePath .\final-build\utils\readme.txt -Encoding utf8
+        
+        # Удаляем отладочный мусор, который не нужен пользователю
+        Remove-Item -Path .\final-build\*.pdb -Force -ErrorAction Ignore
+        Remove-Item -Path .\final-build\*.config -Force -ErrorAction Ignore
+      shell: powershell
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: yt-dlp-gui
-        path: yt-dlp-gui.exe
+        name: yt-dlp-gui-lightweight
+        path: final-build/
