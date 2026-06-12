@@ -13,10 +13,10 @@ namespace yt_dlp_GUI
             toolTipProjectWebsite.SetToolTip(linkLabelProjectWebsite, "https://pprmint.de/yt-dlp-gui");
             toolTipWebsite.SetToolTip(pictureBoxFooter, "https://pprmint.de");
             // yt-dlp.
-            toolTipYtdlpGithub.SetToolTip(linkLabelYtdlpGithub, "https://github.com/yt-dlp/yt-dlp");
+            toolTipYtdlpGithub.SetToolTip(linkLabelYtdlpGithub, "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe");
             toolTipYtdlpDiscord.SetToolTip(linkLabelYtdlpDiscord, "https://discord.gg/H5MNcFW63r");
             // FFmpeg.
-            toolTipFfmpegGithub.SetToolTip(linkLabelFfmpegGithub, "https://github.com/yt-dlp/FFmpeg-Builds");
+            toolTipFfmpegGithub.SetToolTip(linkLabelFfmpegGithub, "https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip");
             toolTipFfmpegWebsite.SetToolTip(linkLabelFfmpegWebsite, "https://ffmpeg.org");
 
             // yt-dlp GUI version.
@@ -82,16 +82,6 @@ namespace yt_dlp_GUI
             Process.Start(RepoGithubUrl);
         }
 
-        private void LinkLabelYtdlpDiscord_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ProcessStartInfo RepoGithubUrl = new()
-            {
-                FileName = "https://discord.gg/H5MNcFW63r",
-                UseShellExecute = true
-            };
-            Process.Start(RepoGithubUrl);
-        }
-
         private void LinkLabelFfmpegGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ProcessStartInfo RepoGithubUrl = new()
@@ -100,16 +90,6 @@ namespace yt_dlp_GUI
                 UseShellExecute = true
             };
             Process.Start(RepoGithubUrl);
-        }
-
-        private void LinkLabelFfmpegWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ProcessStartInfo FfmpegUrl = new()
-            {
-                FileName = "https://ffmpeg.org",
-                UseShellExecute = true
-            };
-            Process.Start(FfmpegUrl);
         }
 
         private void About_Load(object sender, EventArgs e)
