@@ -150,6 +150,12 @@ namespace yt_dlp_GUI
             };
 
             textBoxOutputDir.Text = UserSettings.Default.OutputDir;
+            txtProxy.Text = UserSettings.Default.ProxyAddress;
+            FormClosing += (sender, e) => 
+            {
+            UserSettings.Default.ProxyAddress = txtProxy.Text;
+            UserSettings.Default.Save();
+            };
             // :::::::::::::::::::::::::::::::: END
 
             // Update the UI.
