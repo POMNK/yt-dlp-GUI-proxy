@@ -170,7 +170,7 @@ namespace yt_dlp_GUI
         // yt-dlp --version
         private void GetVersion()
         {
-            ProcessStartInfo versionStartInfo = new()
+            StartInfo versionStartInfo = new()
             {
                 FileName = ytdlpExe,
                 Arguments = "--version",
@@ -366,6 +366,11 @@ namespace yt_dlp_GUI
             string videoResolution = dropdownVideoResolution.Text.TrimEnd('p');
             string audioFormat = dropdownAudioFormat.Text;
 
+            // Формируем аргумент прокси, если поле txtProxy заполнено
+            string proxyArg = !string.IsNullOrWhiteSpace(txtProxy.Text) 
+                ? $" --proxy \"{txtProxy.Text.Trim()}\"" 
+                : "";
+
             SetActivity("Downloading...");
             Application.DoEvents();
 
@@ -373,8 +378,8 @@ namespace yt_dlp_GUI
             {
                 FileName = ytdlpExe,
                 Arguments = radioButtonVideo.Checked
-                    ? string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -f \"bv*[ext=", videoFormat, "][height<=", videoResolution, "]+ba[ext=m4a]/b\" --ffmpeg-location \"", ffmpegExe, "\" --remux-video ", videoFormat, " --windows-filenames")
-                    : string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -x --audio-format ", audioFormat, " --ffmpeg-location \"", ffmpegExe, "\" --windows-filenames"),
+                    ? string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -f \"bv*[ext=", videoFormat, "][height<=", videoResolution, "]+ba[ext=m4a]/b\" --ffmpeg-location \"", ffmpegExe, "\" --remux-video ", videoFormat, " --windows-filenames", proxyArg)
+                    : string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -x --audio-format ", audioFormat, " --ffmpeg-location \"", ffmpegExe, "\" --windows-filenames", proxyArg),
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -456,7 +461,6 @@ namespace yt_dlp_GUI
 
             downloadThread.Start();
         }
-        // If true, current download will be aborted. Reset to false when new download starts.
         private bool AbortDownloadRequested = false;
         private void ButtonAbortDownload_Click(object sender, EventArgs e)
         {
