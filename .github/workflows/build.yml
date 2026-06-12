@@ -17,7 +17,7 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Publish Self-Contained Single File
-      run: dotnet publish ./yt-dlp-GUI/yt-dlp-gui.csproj --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+      run: dotnet publish ./yt-dlp-GUI/yt-dlp-GUI.csproj --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 
     - name: Prepare Release Folder Structure
       run: |
