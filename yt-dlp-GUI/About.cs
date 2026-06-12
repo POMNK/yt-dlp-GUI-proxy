@@ -76,7 +76,7 @@ namespace yt_dlp_GUI
         {
             ProcessStartInfo RepoGithubUrl = new()
             {
-                FileName = "https://github.com/yt-dlp/yt-dlp",
+                FileName = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe",
                 UseShellExecute = true
             };
             Process.Start(RepoGithubUrl);
@@ -86,7 +86,7 @@ namespace yt_dlp_GUI
         {
             ProcessStartInfo RepoGithubUrl = new()
             {
-                FileName = "https://github.com/yt-dlp/FFmpeg-Builds",
+                FileName = "https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip",
                 UseShellExecute = true
             };
             Process.Start(RepoGithubUrl);
