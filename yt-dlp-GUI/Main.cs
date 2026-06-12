@@ -376,6 +376,18 @@ namespace yt_dlp_GUI
             string videoFormat = dropdownVideoFormat.Text;
             string videoResolution = dropdownVideoResolution.Text.TrimEnd('p');
             string audioFormat = dropdownAudioFormat.Text;
+            
+            string sectionArg = "";
+
+            // Если домохозяйка заполнила From или To, собираем команду нарезки
+            if (!string.IsNullOrWhiteSpace(txtStartSection.Text) || !string.IsNullOrWhiteSpace(txtEndSection.Text))
+            {
+                // Задаем значения по умолчанию: старт с 0, конец — до самого финала (inf)
+                string startValue = string.IsNullOrWhiteSpace(txtStartSection.Text) ? "0" : txtStartSection.Text.Trim();
+                string endValue = string.IsNullOrWhiteSpace(txtEndSection.Text) ? "inf" : txtEndSection.Text.Trim();
+                
+                sectionArg = $" --download-sections \"*{startValue}-{endValue}\"";
+            }
 
             // Формируем аргумент прокси, если поле txtProxy заполнено
             string proxyArg = !string.IsNullOrWhiteSpace(txtProxy.Text) 
@@ -383,14 +395,14 @@ namespace yt_dlp_GUI
                 : "";
 
             SetActivity("Downloading...");
-            Application.DoEvents();
+            Application.Events();
 
             ProcessStartInfo downloadStartInfo = new()
             {
                 FileName = ytdlpExe,
                 Arguments = radioButtonVideo.Checked
-                    ? string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -f \"bv*[ext=", videoFormat, "][height<=", videoResolution, "]+ba[ext=m4a]/b\" --ffmpeg-location \"", ffmpegExe, "\" --remux-video ", videoFormat, " --windows-filenames", proxyArg)
-                    : string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -x --audio-format ", audioFormat, " --ffmpeg-location \"", ffmpegExe, "\" --windows-filenames", proxyArg),
+                    ? string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -f \"bv*[ext=", videoFormat, "][height<=", videoResolution, "]+ba[ext=m4a]/b\" --ffmpeg-location \"", ffmpegExe, "\" --remux-video ", videoFormat, " --windows-filenames", proxyArg, sectionArg)
+                    : string.Concat(sourceUrl, " -P temp:\"", tempFolder, "\" -P home:\"", outputDir, "\" -x --audio-format ", audioFormat, " --ffmpeg-location \"", ffmpegExe, "\" --windows-filenames", proxyArg, sectionArg),
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
