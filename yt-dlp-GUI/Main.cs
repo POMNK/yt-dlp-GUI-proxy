@@ -395,7 +395,7 @@ namespace yt_dlp_GUI
                 : "";
 
             SetActivity("Downloading...");
-            Application.Events();
+            Application.DoEvents();
 
             ProcessStartInfo downloadStartInfo = new()
             {
