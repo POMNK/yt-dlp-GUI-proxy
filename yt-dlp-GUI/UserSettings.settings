@@ -16,6 +16,8 @@
     </Setting>
     <Setting Name="OutputDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    <Setting Name="ProxyAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)"></Value>
     </Setting>
   </Settings>
 </SettingsFile>
