@@ -379,13 +379,47 @@ namespace yt_dlp_GUI
             
             string sectionArg = "";
 
-            // Если заполнено From или To, собираем команду без ломающих парсер кавычек
+            // Функция перевода ЧЧ:ММ:СС или ММ:СС в чистые секунды
+            string ToSeconds(string input)
+            {
+                if (string.IsNullOrWhiteSpace(input)) return "";
+                input = input.Trim();
+                
+                // Если это просто число (секунды), отдаем как есть
+                if (!input.Contains(":")) return input;
+                
+                try
+                {
+                    string[] parts = input.Split(':');
+                    int hours = 0, minutes = 0, seconds = 0;
+                    
+                    if (parts.Length == 3) // ЧЧ:ММ:СС
+                    {
+                        int.TryParse(parts[0], out hours);
+                        int.TryParse(parts[1], out minutes);
+                        int.TryParse(parts[2], out seconds);
+                    }
+                    else if (parts.Length == 2) // ММ:СС
+                    {
+                        int.TryParse(parts[0], out minutes);
+                        int.TryParse(parts[1], out seconds);
+                    }
+                    
+                    return ((hours * 3600) + (minutes * 60) + seconds).ToString();
+                }
+                catch { return "0"; }
+            }
+
+            // Если заполнено From или To, конвертируем время в секунды
             if (!string.IsNullOrWhiteSpace(txtStartSection.Text) || !string.IsNullOrWhiteSpace(txtEndSection.Text))
             {
-                string startValue = string.IsNullOrWhiteSpace(txtStartSection.Text) ? "0" : txtStartSection.Text.Trim();
-                string endValue = string.IsNullOrWhiteSpace(txtEndSection.Text) ? "inf" : txtEndSection.Text.Trim();
+                string startSec = ToSeconds(txtStartSection.Text);
+                string endSec = ToSeconds(txtEndSection.Text);
                 
-                // Убрали \" вокруг звёздочки, теперь yt-dlp прочитает это идеально
+                string startValue = string.IsNullOrWhiteSpace(startSec) ? "0" : startSec;
+                string endValue = string.IsNullOrWhiteSpace(endSec) ? "inf" : endSec;
+                
+                // Передаем аргумент без кавычек и двоеточий — теперь ничего не зависнет!
                 sectionArg = $" --download-sections *{startValue}-{endValue}";
             }
 
