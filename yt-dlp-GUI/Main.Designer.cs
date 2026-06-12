@@ -71,7 +71,7 @@
             // labelSourceUrl
             // 
             labelSourceUrl.AutoSize = true;
-            labelSourceUrl.Location = new Point(9, 53);
+            labelSourceUrl.Location = new Point(9, 53);                        
             labelSourceUrl.Margin = new Padding(0, 12, 0, 0);
             labelSourceUrl.Name = "labelSourceUrl";
             labelSourceUrl.Size = new Size(74, 16);
@@ -320,6 +320,16 @@
             Text = "yt-dlp GUI";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
+            lblProxy = new System.Windows.Forms.Label();
+            txtProxy = new System.Windows.Forms.TextBox();
+            lblProxy.Text = "Proxy:";
+            lblProxy.Location = new System.Drawing.Point(12, 360); 
+            lblProxy.Size = new System.Drawing.Size(55, 20);
+            txtProxy.Location = new System.Drawing.Point(70, 357);
+            txtProxy.Size = new System.Drawing.Size(250, 20);
+            txtProxy.PlaceholderText = "http://127.0.0.1:1080";
+            Controls.Add(lblProxy);
+            Controls.Add(txtProxy);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -351,5 +361,7 @@
         private Button buttonAbortDownload;
         private Button buttonAbout;
         private ToolTip toolTipAbout;
+        private System.Windows.Forms.Label lblProxy;
+        private System.Windows.Forms.TextBox txtProxy;
     }
 }
