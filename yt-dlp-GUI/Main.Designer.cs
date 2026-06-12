@@ -328,7 +328,7 @@
             lblProxy.Size = new System.Drawing.Size(55, 20);
             txtProxy.Location = new System.Drawing.Point(70, ClientSize.Height - 33); 
             txtProxy.Size = new System.Drawing.Size(250, 20);
-            txtProxy.PlaceholderText = "socks5://127.0.0.1:1080";
+            txtProxy.Text = "socks5://127.0.0.1:1080";
             Controls.Add(lblProxy);
             Controls.Add(txtProxy);
             ResumeLayout(false);
