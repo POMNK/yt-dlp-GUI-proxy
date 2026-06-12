@@ -150,14 +150,19 @@ namespace yt_dlp_GUI
             };
 
             textBoxOutputDir.Text = UserSettings.Default.OutputDir;
-            txtProxy.Text = UserSettings.Default.ProxyAddress;
+            string proxyFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "proxy_config.txt");
+            if (File.Exists(proxyFilePath))
+            {
+            txtProxy.Text = File.ReadAllText(proxyFilePath).Trim();
+            }
             FormClosing += (sender, e) => 
             {
-            UserSettings.Default.ProxyAddress = txtProxy.Text;
-            UserSettings.Default.Save();
+            try
+            {
+            File.WriteAllText(proxyFilePath, txtProxy.Text.Trim());
+            }
+            catch { }
             };
-            // :::::::::::::::::::::::::::::::: END
-
             // Update the UI.
             ValidateFormatState();
 
