@@ -16,11 +16,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+    - name: Publish Self-Contained Single File
+      run: dotnet publish --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: yt-dlp-gui-exe
-        path: "**/bin/Release/net8.0-windows10.0.17763.0/"
+        path: "**/bin/Release/**/publish/yt-dlp-gui.exe"
