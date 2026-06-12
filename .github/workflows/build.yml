@@ -17,18 +17,15 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Publish Self-Contained Single File
-      run: dotnet publish ./yt-dlp-GUI/yt-dlp-GUI.csproj --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-build
+      run: dotnet publish --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-exe
 
-    - name: Create Utils Folder and Readme
+    - name: Move EXE to Root
       run: |
-        New-Item -ItemType Directory -Force -Path .\final-build\utils
-        "Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe here." | Out-File -FilePath .\final-build\utils\readme.txt -Encoding utf8
-        Remove-Item -Path .\final-build\*.pdb -Force -ErrorAction Ignore
-        Remove-Item -Path .\final-build\*.config -Force -ErrorAction Ignore
-      shell: powershell
+        move .\final-exe\yt-dlp-gui.exe .\yt-dlp-gui.exe
+      shell: cmd
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: yt-dlp-gui
-        path: final-build/
+        path: yt-dlp-gui.exe
