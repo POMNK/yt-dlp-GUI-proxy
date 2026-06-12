@@ -323,9 +323,9 @@
             lblProxy = new System.Windows.Forms.Label();
             txtProxy = new System.Windows.Forms.TextBox();
             lblProxy.Text = "Proxy:";
-            lblProxy.Location = new System.Drawing.Point(12, 360); 
+            lblProxy.Location = new System.Drawing.Point(12, 15); 
             lblProxy.Size = new System.Drawing.Size(55, 20);
-            txtProxy.Location = new System.Drawing.Point(70, 357);
+            txtProxy.Location = new System.Drawing.Point(70, 12);
             txtProxy.Size = new System.Drawing.Size(250, 20);
             txtProxy.PlaceholderText = "http://127.0.0.1:1080";
             Controls.Add(lblProxy);
