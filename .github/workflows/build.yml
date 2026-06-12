@@ -17,18 +17,15 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Publish Self-Contained Single File
-      run: dotnet publish --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-exe
+      run: dotnet publish yt-dlp-GUI.csproj --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-exe
 
     - name: Prepare Release Folder Structure
       run: |
-        # Создаем папки
         New-Item -ItemType Directory -Force -Path .\release-pack
         New-Item -ItemType Directory -Force -Path .\release-pack\utils
         
-        # Переносим собранный .exe с оригинальным именем маленькими буквами
         Move-Item -Path .\final-exe\yt-dlp-gui.exe -Destination .\release-pack\yt-dlp-gui.exe
         
-        # Записываем текст в файл readme.txt
         "Поместите файлы yt-dlp.exe, ffmpeg.exe и ffprobe.exe в эту папку." | Out-File -FilePath .\release-pack\utils\readme.txt -Encoding utf8
       shell: powershell
 
