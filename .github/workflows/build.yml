@@ -17,21 +17,16 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Publish Self-Contained Single File
-      run: dotnet publish ./yt-dlp-GUI/yt-dlp-GUI.csproj --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+      run: dotnet publish ./yt-dlp-GUI/yt-dlp-GUI.csproj --configuration Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --output ./final-build
 
-    - name: Prepare Release Folder Structure
+    - name: Create Utils Folder and Readme
       run: |
-        New-Item -ItemType Directory -Force -Path .\release-pack
-        New-Item -ItemType Directory -Force -Path .\release-pack\utils
-        
-        Move-Item -Path ".\bin\Release\net8.0-windows10.0.17763.0\win-x64\publish\yt-dlp-gui.exe" -Destination .\release-pack\yt-dlp-gui.exe
-        
-        # Заменили текст на английский во избежание проблем с кодировкой консоли
-        "Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe in this folder." | Out-File -FilePath .\release-pack\utils\readme.txt -Encoding utf8
+        New-Item -ItemType Directory -Force -Path .\final-build\utils
+        "Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe here." | Out-File -FilePath .\final-build\utils\readme.txt -Encoding utf8
       shell: powershell
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: yt-dlp-gui
-        path: release-pack/
+        path: final-build/
