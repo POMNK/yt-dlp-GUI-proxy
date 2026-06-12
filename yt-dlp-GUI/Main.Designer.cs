@@ -396,5 +396,9 @@
         private ToolTip toolTipAbout;
         private System.Windows.Forms.Label lblProxy;
         private System.Windows.Forms.TextBox txtProxy;
+        private System.Windows.Forms.Label lblStartSection;
+        private System.Windows.Forms.TextBox txtStartSection;
+        private System.Windows.Forms.Label lblEndSection;
+        private System.Windows.Forms.TextBox txtEndSection;
     }
 }
