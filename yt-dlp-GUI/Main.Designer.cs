@@ -320,17 +320,49 @@
             Text = "yt-dlp GUI";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
-            ClientSize = new System.Drawing.Size(ClientSize.Width, ClientSize.Height + 40);
+            // Увеличиваем высоту окна программы на 80 пикселей под прокси и таймкоды
+            ClientSize = new System.Drawing.Size(ClientSize.Width, ClientSize.Height + 80);
+            // --- БЛОК ПРОКСИ ---
             lblProxy = new System.Windows.Forms.Label();
             txtProxy = new System.Windows.Forms.TextBox();
+
             lblProxy.Text = "Proxy:";
-            lblProxy.Location = new System.Drawing.Point(12, ClientSize.Height - 30); 
+            lblProxy.Location = new System.Drawing.Point(12, ClientSize.Height - 70); 
             lblProxy.Size = new System.Drawing.Size(55, 20);
-            txtProxy.Location = new System.Drawing.Point(70, ClientSize.Height - 33); 
+
+            txtProxy.Location = new System.Drawing.Point(70, ClientSize.Height - 73); 
             txtProxy.Size = new System.Drawing.Size(250, 20);
-            txtProxy.Text = "socks5://127.0.0.1:1080";
+            txtProxy.PlaceholderText = "socks5://127.0.0.1:1080";
+
+            // --- БЛОК ТАЙМКОДОВ ---
+            lblStartSection = new System.Windows.Forms.Label();
+            txtStartSection = new System.Windows.Forms.TextBox();
+            lblEndSection = new System.Windows.Forms.Label();
+            txtEndSection = new System.Windows.Forms.TextBox();
+
+            lblStartSection.Text = "From:";
+            lblStartSection.Location = new System.Drawing.Point(12, ClientSize.Height - 35);
+            lblStartSection.Size = new System.Drawing.Size(40, 20);
+
+            txtStartSection.Location = new System.Drawing.Point(70, ClientSize.Height - 38);
+            txtStartSection.Size = new System.Drawing.Size(90, 20);
+            txtStartSection.PlaceholderText = "00:00:00";
+
+            lblEndSection.Text = "To:";
+            lblEndSection.Location = new System.Drawing.Point(175, ClientSize.Height - 35);
+            lblEndSection.Size = new System.Drawing.Size(25, 20);
+
+            txtEndSection.Location = new System.Drawing.Point(210, ClientSize.Height - 38);
+            txtEndSection.Size = new System.Drawing.Size(90, 20);
+            txtEndSection.PlaceholderText = "00:05:00";
+            
+            // Добавляем все элементы на форму
             Controls.Add(lblProxy);
             Controls.Add(txtProxy);
+            Controls.Add(lblStartSection);
+            Controls.Add(txtStartSection);
+            Controls.Add(lblEndSection);
+            Controls.Add(txtEndSection);
             ResumeLayout(false);
             PerformLayout();
         }
