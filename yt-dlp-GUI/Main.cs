@@ -379,14 +379,14 @@ namespace yt_dlp_GUI
             
             string sectionArg = "";
 
-            // Если домохозяйка заполнила From или To, собираем команду нарезки
+            // Если заполнено From или To, собираем команду без ломающих парсер кавычек
             if (!string.IsNullOrWhiteSpace(txtStartSection.Text) || !string.IsNullOrWhiteSpace(txtEndSection.Text))
             {
                 string startValue = string.IsNullOrWhiteSpace(txtStartSection.Text) ? "0" : txtStartSection.Text.Trim();
                 string endValue = string.IsNullOrWhiteSpace(txtEndSection.Text) ? "inf" : txtEndSection.Text.Trim();
                 
-                // Добавили флаг --force-keyframes-at-cuts для точной и гарантированной обрезки
-                sectionArg = $" --download-sections \"*{startValue}-{endValue}\" --force-keyframes-at-cuts";
+                // Убрали \" вокруг звёздочки, теперь yt-dlp прочитает это идеально
+                sectionArg = $" --download-sections *{startValue}-{endValue}";
             }
 
             // Формируем аргумент прокси, если поле txtProxy заполнено
