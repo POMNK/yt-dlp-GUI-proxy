@@ -21,15 +21,13 @@ jobs:
 
     - name: Prepare Release Folder Structure
       run: |
-        # Создаем чистые папки для выдачи
         New-Item -ItemType Directory -Force -Path .\release-pack
         New-Item -ItemType Directory -Force -Path .\release-pack\utils
         
-        # Находим скомпилированный .exe в стандартной папке и переносим его
         Move-Item -Path ".\bin\Release\net8.0-windows10.0.17763.0\win-x64\publish\yt-dlp-gui.exe" -Destination .\release-pack\yt-dlp-gui.exe
         
-        # Создаем readme
-        "Поместите файлы yt-dlp.exe, ffmpeg.exe и ffprobe.exe в эту папку." | Out-File -FilePath .\release-pack\utils\readme.txt -Encoding utf8
+        # Заменили текст на английский во избежание проблем с кодировкой консоли
+        "Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe in this folder." | Out-File -FilePath .\release-pack\utils\readme.txt -Encoding utf8
       shell: powershell
 
     - name: Upload Artifact
