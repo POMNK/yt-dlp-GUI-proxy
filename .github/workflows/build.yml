@@ -23,6 +23,8 @@ jobs:
       run: |
         New-Item -ItemType Directory -Force -Path .\final-build\utils
         "Place yt-dlp.exe, ffmpeg.exe and ffprobe.exe here." | Out-File -FilePath .\final-build\utils\readme.txt -Encoding utf8
+        Remove-Item -Path .\final-build\*.pdb -Force -ErrorAction Ignore
+        Remove-Item -Path .\final-build\*.config -Force -ErrorAction Ignore
       shell: powershell
 
     - name: Upload Artifact
