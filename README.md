@@ -1,7 +1,6 @@
 fork yt-dlp GUI + proxy
 
-
-Installation instructions:
+###Installation instructions:
 
 1. Unpack the archive `yt-dlp-gui.zip` to any convenient folder.
 2. **MUST before the first launch:** Download the current files `yt-dlp.exe`, `ffmpeg.exe` and `ffprobe.exe` and put them in the folder `utils`. 
